@@ -1,37 +1,92 @@
-import axios from 'axios';
+import "/src/css/style.css";
+import axios from "axios";
 
-// Funzione per effettuare una chiamata alle API e visualizzare i risultati
-async function searchCity() {
-  const cityName = document.getElementById('city-input').value;
-  const resultsDiv = document.getElementById('results');
+const searchButton = document.getElementById("search-btn");
+const cityInput = document.getElementById("city-input");
+const resultsDiv = document.getElementById("results");
+const homeImage = document.getElementById("home-img");
 
-  // Effettua la chiamata alle API utilizzando Axios
-  try {
+searchButton.addEventListener("click", () => performSearch());
+
+
+//performiamo la ricerca
+async function performSearch() {
+    const cityName = cityInput.value.trim();
+
+    if (cityName.length === 0) {
+        displayError(`Please, enter a city name.`);
+        return;
+    }
+
+    try {
+        const data = await fetchCityData(cityName);
+        displayResults(data);
+        cityInput.value = "";
+    } catch (error) {
+        console.error(error);
+        displayError(`City not found.`);
+    }
+}
+
+//chiamata API
+async function fetchCityData(cityName) {
+ try {
     const response = await axios.get(`https://api.teleport.org/api/cities/?search=${cityName}`);
     const data = response.data;
 
-    // Visualizza i risultati nell'HTML
-    if (data._embedded && data._embedded['city:search-results']) {
-      const cityData = data._embedded['city:search-results'][0];
-      resultsDiv.innerHTML = `
-        <h1>${cityData.matching_full_name}</h1>
-        <h2>Population: ${cityData.matching_alternate_names[0].population}</h2>
-        <h3>Country: ${cityData.matching_alternate_names[0].country}</h3>
-        <p>Description: ${cityData.matching_full_name}</p>
-      `;
-    } else {
-      resultsDiv.innerHTML = `<p>No results found for ${cityName}</p>`;
+    if (data.count === 0) {
+        throw new Error("City not found.");
     }
-  } catch (error) {
-    console.error('Error fetching data from the API:', error);
-    resultsDiv.innerHTML = `<p>An error occurred while fetching data.</p>`;
-  }
+    //dati città
+    const cityId = data._embedded["city:search-results"][0]._links["city:item"].href;
+    const cityResponse = await axios.get(cityId);
+    const cityData = cityResponse.data;
+    //punteggio città
+    const urbanAreaId = cityData._links["city:urban_area"].href;
+    const urbanAreaScoresResponse = await axios.get(`${urbanAreaId}scores/`);
+    const urbanAreaScoresData = urbanAreaScoresResponse.data;
+    //img città
+    const urbanAreaSlug = cityData._links["city:urban_area"].href.split("/").slice(-2)[0];
+    const urbanAreaImagesResponse = await axios.get(`https://api.teleport.org/api/urban_areas/${urbanAreaSlug}/images/`);
+    const urbanAreaImagesData = urbanAreaImagesResponse.data;
+
+    //ritorno dei dati
+    return {
+        teleport_cityName: data._embedded["city:search-results"][0].matching_full_name,
+        teleport_city_score: urbanAreaScoresData.teleport_city_score,
+        summary: urbanAreaScoresData.summary,
+        categories: urbanAreaScoresData.categories,
+        imageUrl: urbanAreaImagesData.photos[0].image.web
+    };
+ }catch(error) {
+    throw new Error("error during api call");
+ }
 }
 
-// Aggiungi un gestore di eventi per il pulsante "Search"
-const searchButton = document.getElementById('search-btn');
-searchButton.addEventListener('click', searchCity);
+async function displayResults(data) {
+    const homeImage = document.getElementById("home-img");
+    homeImage.src = data.imageUrl;
 
+    
+    const resultsDiv = document.getElementById("results");
+    const cityImage = document.createElement("img");
+    cityImage.src = data.imageUrl;
+    cityImage.style.width = "100%";
+    cityImage.style.height = "auto";
+
+
+    // risultati HTML
+    resultsDiv.innerHTML = `
+        <h1>${data.teleport_cityName}</h1>
+        <h3>Teleport City Score</h3>
+        <h2>${data.teleport_city_score.toFixed(2)}</h2>
+        <p>${data.summary}</p>
+        `;
+}
+  
+function displayError(message) {
+    resultsDiv.innerHTML = `<p class="error">${message}</p>`;
+}
 
 
 

@@ -77,7 +77,17 @@ header h1 {
     justify-content: center;
     text-align: center;
     color: cadetblue;
-    font-size: 50px;
+    font-size: 55px;
+    margin-bottom: 18px;
+    text-shadow: 0 0 10px #232526;
+}
+
+header p {
+    font-size: 32px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     margin-bottom: 25px;
     text-shadow: 0 0 10px #232526;
 }
@@ -162,16 +172,3 @@ footer {
     color: #fff;
 }
 
-a {
-    color: #fff;
-}
-
-a:hover {
-    color: crimson;
-}
-
-.chart-container {
-    position: relative;
-    height: 400px;
-    margin: 80px 20%;
-}
