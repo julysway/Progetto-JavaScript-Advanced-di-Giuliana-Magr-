@@ -1,15 +1,16 @@
 import "/src/css/style.css";
+import "/src/css/media-query.css";
 import axios from "axios";
 
 const searchButton = document.getElementById("search-btn");
 const cityInput = document.getElementById("city-input");
 const resultsDiv = document.getElementById("results");
-const homeImage = document.getElementById("home-img");
+
 
 searchButton.addEventListener("click", () => performSearch());
 
 
-//performiamo la ricerca
+//parametri ricerca
 async function performSearch() {
     const cityName = cityInput.value.trim();
 
