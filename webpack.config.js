@@ -40,8 +40,8 @@ const config = {
                 type: "asset",
             },
         ],
-    },
-};
+    },  
+    };
 
 module.exports = () => {
     if (isProduction) {
