@@ -1,5 +1,6 @@
 import "/src/css/style.css";
 import "/src/css/media-query.css";
+import "/src/img/home.jpg";
 import axios from "axios";
 
 const searchButton = document.getElementById("search-btn");
