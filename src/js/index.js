@@ -6,6 +6,7 @@ import axios from "axios";
 const searchButton = document.getElementById("search-btn");
 const cityInput = document.getElementById("city-input");
 const resultsDiv = document.getElementById("results");
+const homeImage = document.getElementById("home-img");
 
 
 searchButton.addEventListener("click", () => performSearch());
