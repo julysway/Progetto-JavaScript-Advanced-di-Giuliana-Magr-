@@ -9,7 +9,7 @@
 ***City Life Style*** is a web app that allows you to visualize the quality of life in major cities around the world.
 The app is implemented using the Teleport APIs.
 
-![SCREENSHOTS](https://ibb.co/qyhrPdv)
+[![Screenshot1.png](https://i.postimg.cc/B6RjPd4s/Screenshot1.png)](https://postimg.cc/zbSz92yP)
 
  Simply enter the name of the city you desire in the search bar, and the app will provide you with a score, summary, and an image of the city you selected.. 
  ***I hope you like it!***
