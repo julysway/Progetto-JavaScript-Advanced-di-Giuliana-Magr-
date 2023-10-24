@@ -14,7 +14,7 @@ The app is implemented using the Teleport APIs.
  Simply enter the name of the city you desire in the search bar, and the app will provide you with a score, summary, and an image of the city you selected.. 
  ***I hope you like it!***
 
- ![SCREENSHOTS](C:\Users\Giuliana\Desktop\Screenshot2.png)
+ [![Screenshot2.png](https://i.postimg.cc/mgW75FxR/Screenshot2.png)](https://postimg.cc/MvtccHKr)
 
 
 This site was built using [Netlify](https://www.netlify.com/)
