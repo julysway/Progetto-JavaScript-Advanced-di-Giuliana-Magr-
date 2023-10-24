@@ -3,13 +3,13 @@
 # City Life Style
 ****---Teleport API---****
 
-🔗PROECT LINK:[CityLifeStyle](https://citylifestyle.netlify.app/)
+🔗PROJECT LINK:[CityLifeStyle](https://citylifestyle.netlify.app/)
 
 ***JavaScript project for the Strat2Impact University*** master's program.
 ***City Life Style*** is a web app that allows you to visualize the quality of life in major cities around the world.
 The app is implemented using the Teleport APIs.
 
-![SCREENSHOTS](C:\Users\Giuliana\Desktop\Screenshot1.png)
+![SCREENSHOTS](https://ibb.co/qyhrPdv)
 
  Simply enter the name of the city you desire in the search bar, and the app will provide you with a score, summary, and an image of the city you selected.. 
  ***I hope you like it!***
