@@ -4,10 +4,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
-
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : "style-loader";
-
-
+const stylesHandler = isProduction
+  ? MiniCssExtractPlugin.loader
+  : "style-loader";
 
 const config = {
     entry: "./src/js/index.js",
@@ -22,7 +21,6 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            favicon: "./src/img/favicon1.ico",
         }),
     
     ],
@@ -48,14 +46,12 @@ const config = {
     };
 
 module.exports = () => {
-    if (isProduction) {
-        config.mode = "production";
-        
-        config.plugins.push(new MiniCssExtractPlugin());
-        
-        
-    } else {
-        config.mode = "development";
-    }
-    return config;
+  if (isProduction) {
+    config.mode = "production";
+
+    config.plugins.push(new MiniCssExtractPlugin());
+  } else {
+    config.mode = "development";
+  }
+  return config;
 };
